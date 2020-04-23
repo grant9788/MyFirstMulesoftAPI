@@ -1,0 +1,64 @@
+#%RAML 1.0
+title: PhoneValidator
+baseUri: http://apilayer.net/api
+securitySchemes:
+  basic:
+    type: Basic Authentication
+    displayName: Basic Authentication
+    description: API only works with basic authenication
+protocols: [HTTP]
+description: NUMVERIFY
+documentation:
+  - title: NUM Verify API
+    content: Refere below doc
+     https://numverify.com/documentation
+
+types:
+  apiresponse:
+    properties:
+      valid: boolean
+      number: string
+      local_format: string
+      international_format: string
+      country_prefix: string
+      country_code: string
+      country_name: string
+      location: string
+      carrier: string
+      line_type: string
+
+/validate:
+  get:
+    queryParameters:
+      access_key: string
+      number: string
+      country_code: string
+      format: string
+    description: For validating the phone
+    displayName: Validate Phone
+    protocols: [HTTP]
+    responses:
+      200:
+        body:
+          application/json:
+            type: apiresponse
+            example:
+              {
+            "valid":true,
+            "number":"14158586273",
+            "local_format":"4158586273",
+            "international_format":"+14158586273",
+            "country_prefix":"+1",
+             "country_code":"US",
+             "country_name":"United States of America",
+            "location":"Novato",
+            "carrier":"AT&T Mobility LLC",
+            "line_type":"mobile"
+              }
+
+  
+      
+  
+
+
+  
